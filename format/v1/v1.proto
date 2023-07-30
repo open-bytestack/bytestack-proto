@@ -1,0 +1,31 @@
+syntax = "proto3";
+package v1;
+option go_package = "/;v1";
+
+message MagicHeader{
+    uint64 magic_number = 1;
+    uint64 stack_id = 2;
+}
+
+message DataHeader{
+    uint32 magic_start = 1;
+    uint32 cookie = 2;
+    uint32 size = 3;
+    uint32 crc = 4;
+    uint32 magic_end = 5;
+}
+
+message IndexRecord{
+    uint32 cookie = 1;
+    uint64 offset_data = 2;
+    uint64 size_data = 3;
+}
+
+message MegicRecord{
+    int64 create_time = 1;
+    uint64 offset_data = 2;
+    uint32 size_data = 3;
+    uint32 cookie = 4;
+    string filename = 5;
+    bytes extra = 6;
+}
