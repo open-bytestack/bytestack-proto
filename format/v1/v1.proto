@@ -2,12 +2,20 @@ syntax = "proto3";
 package v1;
 option go_package = "/;v1";
 
+
+enum MagicNumber{
+    None = 0;
+    HeaderMagic = 199809;
+    DataMagicStart = 257758;
+    DataMagicEnd = 857752;
+}
+
 message MagicHeader{
     uint64 magic_number = 1;
     uint64 stack_id = 2;
 }
 
-message DataHeader{
+message DataRecordHeader{
     uint32 magic_start = 1;
     uint32 cookie = 2;
     uint32 size = 3;
@@ -16,12 +24,12 @@ message DataHeader{
 }
 
 message IndexRecord{
-    uint32 cookie = 1;
-    uint64 offset_data = 2;
-    uint64 size_data = 3;
+    uint64 offset_data = 1;
+    uint32 size_data = 2;
+    uint32 cookie = 3;
 }
 
-message MegicRecord{
+message MetaRecord{
     int64 create_time = 1;
     uint64 offset_data = 2;
     uint32 size_data = 3;
